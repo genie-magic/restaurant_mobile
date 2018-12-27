@@ -3,14 +3,10 @@ import 'all_translations.dart';
 
 // Import scenes
 import 'package:restaurant_manage/scenes/city.dart';
-import 'package:restaurant_manage/scenes/category.dart';
-import 'package:restaurant_manage/scenes/item.dart';
-import 'package:restaurant_manage/scenes/menu.dart';
-import 'package:restaurant_manage/scenes/restaurant.dart';
 
 void main() async {
   // Initializes the translation module
-  await allTranslations.init();
+  // await allTranslations.init();
 
   // then start the application
   runApp(MyApp());
@@ -32,14 +28,31 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.cyan,
+        accentColor: Colors.white,
+        primaryTextTheme: TextTheme(
+          body1: TextStyle(
+            color: Color(0xff00283d)
+          ),
+          title: TextStyle(
+            color: Colors.white
+          ),
+          headline: TextStyle(
+            color: Colors.white
+          ),
+          subhead: TextStyle(
+            color: Color(0xff00283d),
+          )
+        ),
+        primaryIconTheme: IconThemeData(
+          color: Colors.white
+        )
       ),
       home: CityScreen(),
-      routes: <String, WidgetBuilder> {
-        CategoryScreen.routeName: (context) => CategoryScreen(),
-        ItemScreen.routeName: (context) => ItemScreen(),
-        MenuScreen.routeName: (context) => MenuScreen(),
-        RestaurantScreen.routeName: (context) => RestaurantScreen()
+      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+        if (locale != null) {
+          allTranslations.init(locale.languageCode);
+        }
       },
     );
   }

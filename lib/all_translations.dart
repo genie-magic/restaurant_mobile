@@ -13,6 +13,7 @@ Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class GlobalTranslations {
   Locale _locale;
+  TextDirection _textDirection = TextDirection.ltr;
   Map<dynamic, dynamic> _localizedValues;
   VoidCallback _onLocaleChangedCallback;
 
@@ -30,6 +31,12 @@ class GlobalTranslations {
 
   // Returns the current Locale
   get locale => _locale;
+
+  // Returns the current Textdirection
+  get textDirection => _textDirection;
+
+  // Returns the current text direction
+
 
   // One-time initialization
   Future<Null> init([String language]) async {
@@ -63,6 +70,13 @@ class GlobalTranslations {
       language = "en";
     }
     _locale = Locale(language, "");
+
+    // For Arabic, Hebrew, Persian and urdu set text direction to RTL
+    if (language == "ar") {
+      _textDirection = TextDirection.rtl;
+    } else {
+      _textDirection = TextDirection.ltr;
+    }
 
     // Load the language strings
     String jsonContent = await rootBundle.loadString("locale/i18n_${_locale.languageCode}.json");

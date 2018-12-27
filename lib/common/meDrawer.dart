@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+// Import components
+import 'package:restaurant_manage/all_translations.dart';
+
+// Import Screens
+import 'package:restaurant_manage/scenes/aboutus.dart';
+
 class MeDrawer extends StatefulWidget {
   @override
   MeDrawerState createState() => MeDrawerState();
@@ -24,7 +30,14 @@ class MeDrawerState extends State<MeDrawer> {
       )
     );
 
-    ListTile getNavItem(var icon, String s, String routeName) {
+    const aboutChild = AboutListTile(
+      child: Text("About"),
+      applicationName: "Restaurant Manage",
+      applicationVersion: "v1.0.0",
+      applicationIcon: Icon(Icons.adb),
+    );
+
+    ListTile getNavItem(var icon, String s, {String routeName, Function handleTap}) {
       return new ListTile(
           leading: Icon(icon),
           title: Text(s),
@@ -36,6 +49,10 @@ class MeDrawerState extends State<MeDrawer> {
               if (routeName == '/') {
                 Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));
               } else {
+                if (handleTap != null) {
+                  handleTap();
+                  return;
+                }
                 Navigator.of(context).pushNamed(routeName);
               }
             });
@@ -45,8 +62,16 @@ class MeDrawerState extends State<MeDrawer> {
 
     var myNavChildren =[
       headerChild,
-      getNavItem(Icons.home, "Home", "/"),
-      getNavItem(Icons.restaurant, "Restaurants", "/restaurants")
+      getNavItem(Icons.home, allTranslations.text('Home'), routeName: "/"),
+      getNavItem(Icons.info, allTranslations.text("About Us"), handleTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AboutUs()
+          )
+        );
+      }),
+      aboutChild
     ];
 
     return Drawer(
