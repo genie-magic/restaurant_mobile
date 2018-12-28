@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:restaurant_manage/common/meDrawer.dart';
 import 'package:restaurant_manage/common/searchAppbar.dart';
 import 'package:restaurant_manage/all_translations.dart';
+import 'package:restaurant_manage/common/components.dart';
 
 // Import screens
 import 'package:restaurant_manage/scenes/restaurant.dart';
@@ -70,27 +71,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             alignment: Alignment.center,
             child: Text(
               categoryItems[index].name,
-              style: TextStyle(
-                  fontSize: 28.0,
-                  shadows: [
-                    Shadow( // bottomLeft
-                        offset: Offset(-1.5, -1.5),
-                        color: Colors.white
-                    ),
-                    Shadow( // bottomRight
-                        offset: Offset(1.5, -1.5),
-                        color: Colors.white
-                    ),
-                    Shadow( // topRight
-                        offset: Offset(1.5, 1.5),
-                        color: Colors.white
-                    ),
-                    Shadow( // topLeft
-                        offset: Offset(-1.5, 1.5),
-                        color: Colors.white
-                    )
-                  ]
-              ),
+              style: MyTextStyle.textStyle(),
             ),
           ),
         )
@@ -114,7 +95,7 @@ class CategoryScreenState extends State<CategoryScreen> {
         appBar: PreferredSize(
             child: SearchAppBar(
               onTextChange: onTextChange,
-              title: "Categories",
+              title: allTranslations.text("Categories"),
             ),
             preferredSize: const Size.fromHeight(kToolbarHeight)
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_manage/all_translations.dart';
 
 class SearchAppBar extends StatefulWidget {
   final Function onTextChange;
@@ -75,7 +76,7 @@ class _SearchAppBarState extends State<SearchAppBar>
       controller: _searchQuery,
       autofocus: true,
       decoration: InputDecoration(
-        hintText: 'Search ${widget.title}...',
+        hintText: allTranslations.text("Search")+' ${widget.title}...',
         border: InputBorder.none,
         hintStyle: const TextStyle(color: Colors.white30),
       ),

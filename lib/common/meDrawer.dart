@@ -40,7 +40,11 @@ class MeDrawerState extends State<MeDrawer> {
     ListTile getNavItem(var icon, String s, {String routeName, Function handleTap}) {
       return new ListTile(
           leading: Icon(icon),
-          title: Text(s),
+          title: Text(s,
+          style: TextStyle(
+              fontFamily: "JF Flat",
+            fontSize: 19
+          ),),
           onTap: () {
             setState(() {
               // pop closes the drawer
@@ -71,7 +75,6 @@ class MeDrawerState extends State<MeDrawer> {
           )
         );
       }),
-      aboutChild
     ];
 
     return Drawer(

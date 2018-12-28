@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.cyan,
         accentColor: Colors.white,
+        fontFamily: 'JF Flat',
         primaryTextTheme: TextTheme(
           body1: TextStyle(
             color: Color(0xff00283d)

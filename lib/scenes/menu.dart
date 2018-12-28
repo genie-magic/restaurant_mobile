@@ -32,6 +32,7 @@ class MenuScreenState extends State<MenuScreen> {
   List<Menu> menuLists;
 
   Future<Menu> getMenuData() async {
+    print(Uri.encodeFull('$url?restaurant=${widget.restaurantId}&menu_name=$searchQuery&item_name=$searchQuery'));
     var res = await http.get(Uri.encodeFull('$url?restaurant=${widget.restaurantId}&menu_name=$searchQuery&item_name=$searchQuery'), headers: {"Accept": "application/json"});
 
     setState(() {
@@ -98,7 +99,9 @@ class MenuScreenState extends State<MenuScreen> {
     }
 
     return custom.ExpansionTile(
-      title: Text(menuLists[index].name),
+      title: Text(
+          menuLists[index].name,
+      ),
       headerBackgroundColor: Colors.white,
       headerBackgroundColorExpanded: Colors.cyan,
       children: menuLists[index].items.map((f) =>_renderMenuItem(f)).toList()
@@ -190,7 +193,7 @@ class MenuScreenState extends State<MenuScreen> {
         appBar: PreferredSize(
             child: SearchAppBar(
               onTextChange: onTextChange,
-              title: "Restaurants",
+              title: allTranslations.text("Menu"),
             ),
             preferredSize: const Size.fromHeight(kToolbarHeight)
         ),
@@ -214,27 +217,7 @@ class MenuScreenState extends State<MenuScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         widget.restaurantTitle,
-                        style: TextStyle(
-                            fontSize: 28.0,
-                            shadows: [
-                              Shadow( // bottomLeft
-                                  offset: Offset(-1.5, -1.5),
-                                  color: Colors.white
-                              ),
-                              Shadow( // bottomRight
-                                  offset: Offset(1.5, -1.5),
-                                  color: Colors.white
-                              ),
-                              Shadow( // topRight
-                                  offset: Offset(1.5, 1.5),
-                                  color: Colors.white
-                              ),
-                              Shadow( // topLeft
-                                  offset: Offset(-1.5, 1.5),
-                                  color: Colors.white
-                              )
-                            ]
-                        ),
+                        style: MyTextStyle.textStyle(),
                       )
                   )
               ),
