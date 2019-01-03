@@ -6,7 +6,7 @@ import 'package:restaurant_manage/scenes/city.dart';
 
 void main() async {
   // Initializes the translation module
-  // await allTranslations.init();
+  await allTranslations.init();
 
   // then start the application
   runApp(MyApp());
@@ -49,12 +49,7 @@ class MyApp extends StatelessWidget {
           color: Colors.white
         )
       ),
-      home: CityScreen(),
-      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
-        if (locale != null) {
-          allTranslations.init(locale.languageCode);
-        }
-      },
+      home: CityScreen()
     );
   }
 }

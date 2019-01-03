@@ -16,17 +16,9 @@ class MeDrawerState extends State<MeDrawer> {
   Widget build(BuildContext context) {
     // TODO: implement build
     var headerChild = DrawerHeader(
-      child: Image.asset(
-          "images/logo.png"
-      ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.lightBlue,
-            Colors.blueAccent
-        ])
+        color: Colors.cyan,
+        image: DecorationImage(image: AssetImage("assets/images/logo.png"))
       )
     );
 

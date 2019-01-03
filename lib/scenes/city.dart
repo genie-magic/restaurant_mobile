@@ -12,13 +12,16 @@ import 'package:restaurant_manage/common/searchAppbar.dart';
 // Import screens
 import 'package:restaurant_manage/scenes/category.dart';
 
+//  Import settings
+import 'package:restaurant_manage/settings.dart';
+
 class CityScreen extends StatefulWidget {
   @override
   CityScreenState createState() => new CityScreenState();
 }
 
 class CityScreenState extends State<CityScreen> {
-  final String url = 'http://localhost:8000/api/cities';
+  final String url = '${MySettings.API_BASE_URL}/api/cities';
   String searchQuery = '';
 
   List<City> cityItems;
@@ -73,7 +76,7 @@ class CityScreenState extends State<CityScreen> {
               image: DecorationImage(
                   fit: BoxFit.fill,
                   image: NetworkImage(
-                    'http://localhost:8000${cityItems[index].image_url}',
+                    '${MySettings.API_BASE_URL}${cityItems[index].image_url}',
                   ),
                   colorFilter: ColorFilter.mode(activeIndex == index? Colors.lightBlueAccent : Colors.black87, BlendMode.color)
               ),

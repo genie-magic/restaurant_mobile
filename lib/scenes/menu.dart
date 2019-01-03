@@ -10,6 +10,9 @@ import 'package:restaurant_manage/common/custom_expansion_tile.dart' as custom;
 import 'package:restaurant_manage/common/searchAppbar.dart';
 import 'package:restaurant_manage/all_translations.dart';
 
+// Import settings
+import 'package:restaurant_manage/settings.dart';
+
 class MenuScreen extends StatefulWidget {
   final String restaurantId;
   final String restaurantTitle;
@@ -27,7 +30,7 @@ class MenuScreen extends StatefulWidget {
 }
 
 class MenuScreenState extends State<MenuScreen> {
-  final String url = "http://localhost:8000/api/menus";
+  final String url = '${MySettings.API_BASE_URL}/api/menus';
   String searchQuery;
   List<Menu> menuLists;
 
@@ -64,7 +67,7 @@ class MenuScreenState extends State<MenuScreen> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                          'http://localhost:8000${item.image_url}',
+                          '${MySettings.API_BASE_URL}${item.image_url}',
                         ),
                         fit: BoxFit.cover
                     ),
@@ -138,7 +141,7 @@ class MenuScreenState extends State<MenuScreen> {
                   shape: CircleBorder(side: BorderSide(color: Colors.grey)),
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage('http://localhost:8000${item.image_url}',)
+                      image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}',)
                   )
               ),
             ),
@@ -209,7 +212,7 @@ class MenuScreenState extends State<MenuScreen> {
                       image: DecorationImage(
                         fit: BoxFit.fill,
                         image: NetworkImage(
-                            'http://localhost:8000${widget.restaurantImage}'
+                            '${MySettings.API_BASE_URL}${widget.restaurantImage}'
                         ),
                       )
                   ),

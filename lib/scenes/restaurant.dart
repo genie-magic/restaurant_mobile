@@ -10,6 +10,7 @@ import 'package:restaurant_manage/common/meDrawer.dart';
 import 'package:restaurant_manage/common/searchAppbar.dart';
 import 'package:restaurant_manage/all_translations.dart';
 import 'package:restaurant_manage/common/components.dart';
+import 'package:restaurant_manage/settings.dart';
 
 class RestaurantScreen extends StatefulWidget {
   final String categoryId;
@@ -20,7 +21,7 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class RestaurantScreenState extends State<RestaurantScreen> {
-  final String url = 'http://localhost:8000/api/restaurants';
+  final String url = '${MySettings.API_BASE_URL}/api/restaurants';
   String searchQuery;
   List<Restaurant> restaurantItems;
 
@@ -66,7 +67,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: NetworkImage(
-                        'http://localhost:8000${restaurantItems[index].image_url}'
+                        '${MySettings.API_BASE_URL}${restaurantItems[index].image_url}'
                     ),
                   )
               ),

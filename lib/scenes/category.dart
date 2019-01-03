@@ -12,6 +12,9 @@ import 'package:restaurant_manage/common/components.dart';
 // Import screens
 import 'package:restaurant_manage/scenes/restaurant.dart';
 
+// Import settings
+import 'package:restaurant_manage/settings.dart';
+
 class CategoryScreen extends StatefulWidget {
   final String cityId;
   CategoryScreen({Key key, @required this.cityId}) : super(key: key);
@@ -21,7 +24,7 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class CategoryScreenState extends State<CategoryScreen> {
-  final String url = "http://localhost:8000/api/categories";
+  final String url = '${MySettings.API_BASE_URL}/api/categories';
   List<Category> categoryItems;
   String searchQuery;
 
@@ -63,7 +66,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             image: DecorationImage(
                 fit: BoxFit.fill,
                 image: NetworkImage(
-                  'http://localhost:8000${categoryItems[index].image_url}'
+                  '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
                 ),
             )
           ),
