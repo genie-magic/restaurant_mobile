@@ -40,7 +40,6 @@ class GlobalTranslations {
 
   // One-time initialization
   Future<Null> init([String language]) async {
-    print('init function is called');
     if (_locale == null) {
       await setNewLanguage(language);
     }
@@ -80,7 +79,6 @@ class GlobalTranslations {
       _textDirection = TextDirection.ltr;
     }
 
-    print(_textDirection);
     // Load the language strings
     String jsonContent = await rootBundle.loadString("locale/i18n_${_locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);

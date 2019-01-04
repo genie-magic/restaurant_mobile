@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_manage/all_translations.dart';
 
+// Import components
+import 'package:restaurant_manage/common/meDrawer.dart';
+
 class AboutUs extends StatefulWidget {
   @override
   AboutUsState createState() => new AboutUsState();
@@ -20,13 +23,18 @@ class AboutUsState extends State<AboutUs> {
        textDirection: allTranslations.textDirection,
        child: Scaffold(
          appBar: AppBar(
-           title: Center(
-             child: Text(allTranslations.text("About Us")),
+           title: Text(allTranslations.text("About Us"),
            ),
+           centerTitle: true,
+           actions: <Widget>[
+             BackButton()
+           ],
          ),
          body: Container(
            child: Text(aboutUs)
-         )
+         ),
+         drawer: MeDrawer(),
+         backgroundColor: Color(0xffe8e8e8),
        )
     );
   }

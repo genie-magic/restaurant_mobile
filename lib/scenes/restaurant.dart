@@ -69,6 +69,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                     image: NetworkImage(
                         '${MySettings.API_BASE_URL}${restaurantItems[index].image_url}'
                     ),
+                      colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
                   )
               ),
               child: Align(
@@ -114,6 +115,13 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         backgroundColor: Color(0xffe8e8e8),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    restaurantItems.clear();
+    super.dispose();
   }
 }
 

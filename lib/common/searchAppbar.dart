@@ -110,7 +110,7 @@ class _SearchAppBarState extends State<SearchAppBar>
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      centerTitle: false,
+      centerTitle: true,
       leading: _isSearching ?
             IconButton(
               icon: Icon(Icons.arrow_back),
@@ -124,7 +124,7 @@ class _SearchAppBarState extends State<SearchAppBar>
               Scaffold.of(context).openDrawer();
             },
       ),
-      title: _isSearching ? _buildSearchField() : Center(child: Text(widget.title)),
+      title: _isSearching ? _buildSearchField() : Text(widget.title),
       actions: _buildActions(),
     );
   }

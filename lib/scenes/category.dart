@@ -64,10 +64,11 @@ class CategoryScreenState extends State<CategoryScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(
-                  '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
-                ),
+              fit: BoxFit.fill,
+              image: NetworkImage(
+                '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
+              ),
+                colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
             )
           ),
           child: Align(
@@ -113,6 +114,13 @@ class CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: Color(0xffe8e8e8),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    categoryItems.clear();
   }
 }
 

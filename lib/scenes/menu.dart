@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -35,7 +37,6 @@ class MenuScreenState extends State<MenuScreen> {
   List<Menu> menuLists;
 
   Future<Menu> getMenuData() async {
-    print(Uri.encodeFull('$url?restaurant=${widget.restaurantId}&menu_name=$searchQuery&item_name=$searchQuery'));
     var res = await http.get(Uri.encodeFull('$url?restaurant=${widget.restaurantId}&menu_name=$searchQuery&item_name=$searchQuery'), headers: {"Accept": "application/json"});
 
     setState(() {
@@ -51,7 +52,20 @@ class MenuScreenState extends State<MenuScreen> {
     getMenuData();
   }
 
-  _showItemDialog(Item item) {
+  _makeItemGallery(int menuIndex) {
+    List<PhotoViewGalleryPageOptions> options;
+
+    options = List<PhotoViewGalleryPageOptions>.from(
+      menuLists[menuIndex].items.map((f) => PhotoViewGalleryPageOptions(
+      imageProvider: NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'),
+      )).toList()
+    );
+
+    return options;
+  }
+
+  _showItemDialog(int menuIndex) {
+    // String price = (int.parse(item.price.toString()) / 100).toString();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -62,33 +76,13 @@ class MenuScreenState extends State<MenuScreen> {
               Navigator.pop(context);
             },
             child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 150, bottom: 50),
-              child: Container (
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                          '${MySettings.API_BASE_URL}${item.image_url}',
-                        ),
-                        fit: BoxFit.cover
-                    ),
-                    color: Colors.transparent
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                        item.name,
-                        style: MyTextStyle.textStyle()
-                    ),
-                    Text(
-                        'Price:${item.price}rian',
-                        style: MyTextStyle.textStyle()
-                    )
-                  ],
-                ),
-              ),
+              padding: EdgeInsets.fromLTRB(20, 100, 20, 100),
+              child: PhotoViewGallery(
+                pageOptions: _makeItemGallery(menuIndex),
+                backgroundDecoration: BoxDecoration(
+                  color: Colors.transparent
+                )
+              )
             ),
           )
         );
@@ -106,15 +100,16 @@ class MenuScreenState extends State<MenuScreen> {
           menuLists[index].name,
       ),
       headerBackgroundColor: Colors.white,
-      headerBackgroundColorExpanded: Colors.cyan,
-      children: menuLists[index].items.map((f) =>_renderMenuItem(f)).toList()
+      headerBackgroundColorExpanded: Theme.of(context).primaryColor,
+      children: menuLists[index].items.map((f) =>_renderMenuItem(f, index)).toList()
     );
   }
 
-  Widget _renderMenuItem(Item item) {
+  Widget _renderMenuItem(Item item, int menuIndex) {
+    String price = (int.parse(item.price.toString()) / 100).toString();
     return GestureDetector(
       onTap: () {
-        _showItemDialog(item);
+        _showItemDialog(menuIndex);
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -141,7 +136,7 @@ class MenuScreenState extends State<MenuScreen> {
                   shape: CircleBorder(side: BorderSide(color: Colors.grey)),
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}',)
+                      image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}')
                   )
               ),
             ),
@@ -157,17 +152,17 @@ class MenuScreenState extends State<MenuScreen> {
             Column(
               children: <Widget>[
                 Text(
-                  "Price",
+                  allTranslations.text("Price"),
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
                 Row(
                   children: <Widget>[
                     Text(
-                        item.price,
+                        price,
                         style: TextStyle(color: Theme.of(context).primaryTextTheme.body1.color)
                     ),
                     Text(
-                      ' Rial',
+                      ' ' + allTranslations.text("rial"),
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     )
                   ],
@@ -214,6 +209,7 @@ class MenuScreenState extends State<MenuScreen> {
                         image: NetworkImage(
                             '${MySettings.API_BASE_URL}${widget.restaurantImage}'
                         ),
+                        colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
                       )
                   ),
                   child: Align(
@@ -242,6 +238,13 @@ class MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    menuLists.clear();
+    super.dispose();
+  }
 }
 
 class Menu {
@@ -261,11 +264,11 @@ class Item {
   final String name;
   final String image_url;
   final String id;
-  final String price;
+  final int price;
 
   Item.fromJsonMap(Map map)
     : name = map['name'],
       image_url = map['image_url'],
       id = map['id'].toString(),
-      price = map['price'].toString();
+      price = map['price'];
 }

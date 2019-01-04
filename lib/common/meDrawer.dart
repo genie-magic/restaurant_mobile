@@ -17,7 +17,7 @@ class MeDrawerState extends State<MeDrawer> {
     // TODO: implement build
     var headerChild = DrawerHeader(
       decoration: BoxDecoration(
-        color: Colors.cyan,
+        color: Theme.of(context).primaryColor,
         image: DecorationImage(image: AssetImage("assets/images/logo.png"))
       )
     );

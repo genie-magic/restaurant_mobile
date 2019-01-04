@@ -46,7 +46,6 @@ class CityScreenState extends State<CityScreen> {
     if (index >= cityItems.length) {
       return null;
     }
-
     return GestureDetector(
       onTapDown: (TapDownDetails details) {
         setState(() {
@@ -73,13 +72,15 @@ class CityScreenState extends State<CityScreen> {
             padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
+              color: Colors.cyan.withOpacity(0.8),
               image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(
-                    '${MySettings.API_BASE_URL}${cityItems[index].image_url}',
-                  ),
-                  colorFilter: ColorFilter.mode(activeIndex == index? Colors.lightBlueAccent : Colors.black87, BlendMode.color)
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                  '${MySettings.API_BASE_URL}${cityItems[index].image_url}',
+                ),
+                colorFilter: ColorFilter.mode(Colors.cyan.withOpacity(0.2), BlendMode.dstATop)
               ),
+              boxShadow: MyBoxShadow.boxShadow()
             ),
             child: Align(
                 alignment: Alignment.center,
@@ -125,6 +126,13 @@ class CityScreenState extends State<CityScreen> {
         backgroundColor: Color(0xffe8e8e8),
       )
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    cityItems.clear();
   }
 }
 
