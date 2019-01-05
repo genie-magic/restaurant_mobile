@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -11,6 +9,7 @@ import 'package:restaurant_manage/common/components.dart';
 import 'package:restaurant_manage/common/custom_expansion_tile.dart' as custom;
 import 'package:restaurant_manage/common/searchAppbar.dart';
 import 'package:restaurant_manage/all_translations.dart';
+import 'package:restaurant_manage/common/my_photo_view/lib/photo_view_gallery.dart';
 
 // Import settings
 import 'package:restaurant_manage/settings.dart';
@@ -64,8 +63,9 @@ class MenuScreenState extends State<MenuScreen> {
     return options;
   }
 
-  _showItemDialog(int menuIndex) {
+  _showItemDialog(int menuIndex, int itemIndex) {
     // String price = (int.parse(item.price.toString()) / 100).toString();
+    var _pageController = new PageController(initialPage: itemIndex);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -77,11 +77,17 @@ class MenuScreenState extends State<MenuScreen> {
             },
             child: Container(
               padding: EdgeInsets.fromLTRB(20, 100, 20, 100),
-              child: PhotoViewGallery(
-                pageOptions: _makeItemGallery(menuIndex),
-                backgroundDecoration: BoxDecoration(
-                  color: Colors.transparent
-                )
+              child: new Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: PhotoViewGallery(
+                      pageController: _pageController,
+                      pageOptions: _makeItemGallery(menuIndex),
+                      backgroundDecoration: BoxDecoration(
+                          color: Colors.transparent
+                      )
+                  ),
+                ),
               )
             ),
           )
@@ -106,10 +112,11 @@ class MenuScreenState extends State<MenuScreen> {
   }
 
   Widget _renderMenuItem(Item item, int menuIndex) {
+    var itemIndex = menuLists[menuIndex].items.indexOf(item);
     String price = (int.parse(item.price.toString()) / 100).toString();
     return GestureDetector(
       onTap: () {
-        _showItemDialog(menuIndex);
+        _showItemDialog(menuIndex, itemIndex);
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),

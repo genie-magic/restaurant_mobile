@@ -19,14 +19,8 @@ class MeDrawerState extends State<MeDrawer> {
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         image: DecorationImage(image: AssetImage("assets/images/logo.png"))
-      )
-    );
-
-    const aboutChild = AboutListTile(
-      child: Text("About"),
-      applicationName: "Restaurant Manage",
-      applicationVersion: "v1.0.0",
-      applicationIcon: Icon(Icons.adb),
+      ),
+      child: Container(),
     );
 
     ListTile getNavItem(var icon, String s, {String routeName, Function handleTap}) {
