@@ -3,7 +3,6 @@ import 'package:restaurant_manage/common/my_photo_view/lib/src/photo_view_scale_
 import 'package:restaurant_manage/common/my_photo_view/lib/src/photo_view_scale_state.dart';
 import 'package:restaurant_manage/common/my_photo_view/lib/src/photo_view_utils.dart';
 
-
 /// Internal widget in which controls the transformation values of the content
 class PhotoViewImageWrapper extends StatefulWidget {
   const PhotoViewImageWrapper({
@@ -359,9 +358,9 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
       borderRadius: BorderRadius.circular(50),
       child: widget.customChild == null
           ? Image(
-        image: widget.imageProvider,
-        gaplessPlayback: widget.gaplessPlayback,
-      )
+            image: widget.imageProvider,
+            gaplessPlayback: widget.gaplessPlayback,
+          )
           : widget.customChild,
     );
   }

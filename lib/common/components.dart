@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyTextStyle {
-  static textStyle() {
+  static textStyle({double fontSize = 28.0}) {
     return TextStyle(
-        fontSize: 28.0,
+        fontSize: fontSize,
         fontFamily: 'VIP Hala',
         color: Color(0xff183b4e),
         shadows: [

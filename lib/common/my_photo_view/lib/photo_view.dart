@@ -11,6 +11,10 @@ import 'package:after_layout/after_layout.dart';
 export 'package:restaurant_manage/common/my_photo_view/lib/src/photo_view_computed_scale.dart';
 export 'package:restaurant_manage/common/my_photo_view/lib/src/photo_view_scale_state.dart';
 
+/// Import global text settings
+import 'package:restaurant_manage/common/components.dart';
+import 'package:restaurant_manage/all_translations.dart';
+
 /// A type definition for a [Function] that receives a [PhotoViewScaleState]
 ///
 typedef PhotoViewScaleStateChangedCallback = void Function(
@@ -125,6 +129,8 @@ class PhotoView extends StatefulWidget {
     this.scaleStateChangedCallback,
     this.enableRotation = false,
     this.transitionOnUserGestures = false,
+    this.itemLabel = '',
+    this.itemPrice = 0
   })  : child = null,
         childSize = null,
         super(key: key);
@@ -148,6 +154,8 @@ class PhotoView extends StatefulWidget {
     this.scaleStateChangedCallback,
     this.enableRotation = false,
     this.transitionOnUserGestures = false,
+    this.itemLabel = '',
+    this.itemPrice = 0
   })  : loadingChild = null,
         imageProvider = null,
         gaplessPlayback = false,
@@ -207,6 +215,12 @@ class PhotoView extends StatefulWidget {
   ///
   /// Should only be set when [PhotoView.heroTag] is set
   final bool transitionOnUserGestures;
+
+  /// Item name on photo
+  final String itemLabel;
+
+  /// Item price on photo *100 multiplied
+  final int itemPrice;
 
   @override
   State<StatefulWidget> createState() {
@@ -335,24 +349,48 @@ class _PhotoViewState extends State<PhotoView>
   }
 
   Widget _buildWrapperImage(BuildContext context) {
-    return PhotoViewImageWrapper(
-      setNextScaleState: setNextScaleState,
-      onStartPanning: onStartPanning,
-      imageProvider: widget.imageProvider,
-      childSize: _childSize,
-      scaleState: _scaleState,
-      backgroundDecoration: widget.backgroundDecoration,
-      gaplessPlayback: widget.gaplessPlayback,
-      size: _computedSize,
-      enableRotation: widget.enableRotation,
-      scaleBoundaries: ScaleBoundaries(
-        widget.minScale ?? 0.0,
-        widget.maxScale ?? double.infinity,
-        widget.initialScale ?? PhotoViewComputedScale.contained,
-        childSize: _childSize,
-        size: _computedSize,
-      ),
-      heroTag: widget.heroTag,
+    double price = widget.itemPrice / 100;
+    return Stack(
+      textDirection: allTranslations.textDirection,
+      alignment: Alignment.bottomCenter,
+      children:<Widget>[
+        PhotoViewImageWrapper(
+            setNextScaleState: setNextScaleState,
+            onStartPanning: onStartPanning,
+            imageProvider: widget.imageProvider,
+            childSize: _childSize,
+            scaleState: _scaleState,
+            backgroundDecoration: widget.backgroundDecoration,
+            gaplessPlayback: widget.gaplessPlayback,
+            size: _computedSize,
+            enableRotation: widget.enableRotation,
+            scaleBoundaries: ScaleBoundaries(
+              widget.minScale ?? 0.0,
+              widget.maxScale ?? double.infinity,
+              widget.initialScale ?? PhotoViewComputedScale.contained,
+              childSize: _childSize,
+              size: _computedSize,
+            ),
+            heroTag: widget.heroTag,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          textDirection: allTranslations.textDirection,
+          children: <Widget>[
+            Text(
+                widget.itemLabel,
+                style: MyTextStyle.textStyle(fontSize: 20.0)
+            ),
+            Text(
+                price.toString() + allTranslations.text('rial'),
+                style: MyTextStyle.textStyle(fontSize: 20.0)
+            )
+          ],
+        )
+
+      ],
     );
   }
 

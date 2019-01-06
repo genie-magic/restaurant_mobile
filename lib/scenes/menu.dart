@@ -56,7 +56,9 @@ class MenuScreenState extends State<MenuScreen> {
 
     options = List<PhotoViewGalleryPageOptions>.from(
       menuLists[menuIndex].items.map((f) => PhotoViewGalleryPageOptions(
-      imageProvider: NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'),
+        imageProvider: NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'),
+        itemLabel: f.name,
+        itemPrice: f.price
       )).toList()
     );
 
@@ -76,7 +78,7 @@ class MenuScreenState extends State<MenuScreen> {
               Navigator.pop(context);
             },
             child: Container(
-              padding: EdgeInsets.fromLTRB(20, 100, 20, 100),
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: new Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),

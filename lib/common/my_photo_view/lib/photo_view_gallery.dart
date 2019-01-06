@@ -143,6 +143,8 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
       scaleStateChangedCallback: scaleStateChangedCallback,
       enableRotation: widget.enableRotation,
       transitionOnUserGestures: widget.transitionOnUserGestures,
+      itemLabel: pageOption.itemLabel,
+      itemPrice: pageOption.itemPrice
     );
   }
 }
@@ -159,6 +161,8 @@ class PhotoViewGalleryPageOptions {
     this.minScale,
     this.maxScale,
     this.initialScale,
+    this.itemLabel,
+    this.itemPrice
   });
 
   /// Mirror to [PhotoView.imageProvider]
@@ -175,4 +179,10 @@ class PhotoViewGalleryPageOptions {
 
   /// Mirror to [PhotoView.initialScale]
   final dynamic initialScale;
+
+  /// Mirror to [PhotoView.itemLabel]
+  final String itemLabel;
+
+  /// Mirror to [PhotoView.itemPrice]
+  final int itemPrice;
 }
