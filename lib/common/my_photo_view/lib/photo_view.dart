@@ -350,8 +350,8 @@ class _PhotoViewState extends State<PhotoView>
 
   Widget _buildWrapperImage(BuildContext context) {
     double price = widget.itemPrice / 100;
+
     return Stack(
-      textDirection: allTranslations.textDirection,
       alignment: Alignment.bottomCenter,
       children:<Widget>[
         PhotoViewImageWrapper(
@@ -377,15 +377,24 @@ class _PhotoViewState extends State<PhotoView>
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
-          textDirection: allTranslations.textDirection,
           children: <Widget>[
             Text(
                 widget.itemLabel,
                 style: MyTextStyle.textStyle(fontSize: 20.0)
             ),
-            Text(
-                price.toString() + allTranslations.text('rial'),
-                style: MyTextStyle.textStyle(fontSize: 20.0)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  allTranslations.text('rial') + ' ',
+                  style: MyTextStyle.textStyle(fontSize: 20.0),
+                ),
+                Text(
+                  ' '+ price.toString(),
+                  style: MyTextStyle.textStyle(fontSize: 20.0),
+                )
+              ],
             )
           ],
         )
