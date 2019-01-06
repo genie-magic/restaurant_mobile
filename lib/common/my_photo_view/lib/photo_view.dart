@@ -380,7 +380,7 @@ class _PhotoViewState extends State<PhotoView>
           children: <Widget>[
             Text(
                 widget.itemLabel,
-                style: MyTextStyle.textStyle(fontSize: 20.0)
+                style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0)
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -388,11 +388,11 @@ class _PhotoViewState extends State<PhotoView>
               children: <Widget>[
                 Text(
                   allTranslations.text('rial') + ' ',
-                  style: MyTextStyle.textStyle(fontSize: 20.0),
+                  style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
                 ),
                 Text(
                   ' '+ price.toString(),
-                  style: MyTextStyle.textStyle(fontSize: 20.0),
+                  style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
                 )
               ],
             )
