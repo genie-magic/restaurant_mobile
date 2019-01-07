@@ -351,10 +351,11 @@ class _PhotoViewState extends State<PhotoView>
   Widget _buildWrapperImage(BuildContext context) {
     double price = widget.itemPrice / 100;
 
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children:<Widget>[
-        PhotoViewImageWrapper(
+    return Container(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children:<Widget>[
+          PhotoViewImageWrapper(
             setNextScaleState: setNextScaleState,
             onStartPanning: onStartPanning,
             imageProvider: widget.imageProvider,
@@ -372,34 +373,35 @@ class _PhotoViewState extends State<PhotoView>
               size: _computedSize,
             ),
             heroTag: widget.heroTag,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Text(
-                widget.itemLabel,
-                style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0)
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  allTranslations.text('rial') + ' ',
-                  style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
-                ),
-                Text(
-                  ' '+ price.toString(),
-                  style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
-                )
-              ],
-            )
-          ],
-        )
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                  widget.itemLabel,
+                  style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0)
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    allTranslations.text('rial') + ' ',
+                    style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
+                  ),
+                  Text(
+                    ' '+ price.toString(),
+                    style: MyTextStyle.textStyle(fontSize: 20.0, shadowOffset: 1.0),
+                  )
+                ],
+              )
+            ],
+          )
 
-      ],
+        ],
+      ),
     );
   }
 

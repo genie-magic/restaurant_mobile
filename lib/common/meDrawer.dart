@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Import components
 import 'package:restaurant_manage/all_translations.dart';
+import 'package:restaurant_manage/common/components.dart';
 
 // Import Screens
 import 'package:restaurant_manage/scenes/aboutus.dart';
@@ -56,7 +57,7 @@ class MeDrawerState extends State<MeDrawer> {
       getNavItem(Icons.info, allTranslations.text("About Us"), handleTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+            MyCustomRoute(
             builder: (context) => AboutUs()
           )
         );

@@ -119,7 +119,10 @@ class _SearchAppBarState extends State<SearchAppBar>
               }
             )
           : IconButton(
-            icon: Icon(Icons.menu),
+            icon: Icon(
+                Icons.menu,
+              size: 45,
+            ),
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },

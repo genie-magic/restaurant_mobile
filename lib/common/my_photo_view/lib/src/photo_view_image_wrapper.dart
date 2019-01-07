@@ -113,11 +113,13 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
   }
 
   void onScaleUpdate(ScaleUpdateDetails details) {
-    final double newScale = _scaleBefore * details.scale;
+    double newScale = _scaleBefore * details.scale;
+
     final Offset delta = details.focalPoint - _normalizedPosition;
     if (details.scale != 1.0) {
       widget.onStartPanning();
     }
+
     setState(() {
       _scale = newScale;
       _position = clampPosition(delta * details.scale);
@@ -319,6 +321,8 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
 
     return GestureDetector(
       child: Container(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+        margin: EdgeInsets.only(left: 10.0, right: 10.0),
         child: Center(
             child: Transform(
           child: widget.enableRotation

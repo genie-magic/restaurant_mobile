@@ -58,7 +58,8 @@ class MenuScreenState extends State<MenuScreen> {
       menuLists[menuIndex].items.map((f) => PhotoViewGalleryPageOptions(
         imageProvider: NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'),
         itemLabel: f.name,
-        itemPrice: f.price
+        itemPrice: f.price,
+        minScale: 0.0
       )).toList()
     );
 
@@ -74,11 +75,8 @@ class MenuScreenState extends State<MenuScreen> {
         return Material(
           type: MaterialType.transparency,
           child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
             child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 80),
               child: new Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
@@ -92,6 +90,9 @@ class MenuScreenState extends State<MenuScreen> {
                 ),
               )
             ),
+            onVerticalDragEnd: (DragEndDetails details) {
+              Navigator.pop(context);
+            },
           )
         );
       }
