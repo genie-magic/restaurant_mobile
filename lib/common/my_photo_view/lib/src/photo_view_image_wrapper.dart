@@ -358,14 +358,17 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
   }
 
   Widget _buildChild() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: widget.customChild == null
-          ? Image(
-            image: widget.imageProvider,
-            gaplessPlayback: widget.gaplessPlayback,
-          )
-          : widget.customChild,
+    return Padding(
+      padding: new EdgeInsets.only(left: 50, right: 50),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: widget.customChild == null
+            ? Image(
+          image: widget.imageProvider,
+          gaplessPlayback: widget.gaplessPlayback,
+        )
+            : widget.customChild,
+      ),
     );
   }
 }
