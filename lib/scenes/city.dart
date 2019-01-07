@@ -47,16 +47,6 @@ class CityScreenState extends State<CityScreen> {
       return null;
     }
     return GestureDetector(
-      onTapDown: (TapDownDetails details) {
-        setState(() {
-          activeIndex = index;
-        });
-      },
-      onTapUp: (TapUpDetails details) {
-        setState(() {
-          activeIndex = -1;
-        });
-      },
       onTap: () {
         Navigator.push(
           context,

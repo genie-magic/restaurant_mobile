@@ -152,7 +152,7 @@ class MenuScreenState extends State<MenuScreen> {
             ),
             Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(left: 15.0),
+                  padding: EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Text(
                     item.name,
                     style: TextStyle(color: Theme.of(context).primaryColor),
