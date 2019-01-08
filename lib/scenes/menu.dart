@@ -56,7 +56,10 @@ class MenuScreenState extends State<MenuScreen> {
 
     options = List<PhotoViewGalleryPageOptions>.from(
       menuLists[menuIndex].items.map((f) => PhotoViewGalleryPageOptions(
-        imageProvider: NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'),
+        imageProvider:
+          f.image_url != null?
+          NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'):
+          AssetImage("assets/images/logo.png"),
         itemLabel: f.name,
         itemPrice: f.price,
         minScale: 0.0
@@ -99,7 +102,34 @@ class MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  Widget _renderMenu(int index) {
+  Widget _renderMenu(int ind) {
+    if (ind == 0) {
+      return AspectRatio(
+        aspectRatio: 4/2,
+        child: Container(
+            margin: EdgeInsets.fromLTRB(10.0, 15.5, 10.0, 2.5),
+            padding: EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(
+                        '${MySettings.API_BASE_URL}${widget.restaurantImage}'
+                    ),
+                    colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
+                )
+            ),
+            child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  widget.restaurantTitle,
+                  style: MyTextStyle.textStyle(),
+                )
+            )
+        ),
+      );
+    }
+    int index = ind - 1;
     if (index >= menuLists.length) {
       return null;
     }
@@ -117,69 +147,73 @@ class MenuScreenState extends State<MenuScreen> {
   Widget _renderMenuItem(Item item, int menuIndex) {
     var itemIndex = menuLists[menuIndex].items.indexOf(item);
     String price = (int.parse(item.price.toString()) / 100).toString();
-    return GestureDetector(
-      onTap: () {
-        _showItemDialog(menuIndex, itemIndex);
-      },
-      child: Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0.0, -5.0),
-                color: Color(0xffEDEDED),
-                blurRadius: 5.0,
+    return Container(
+      margin: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
+      padding: EdgeInsets.all(5.0),
+      child: GestureDetector(
+        onTap: () {
+          _showItemDialog(menuIndex, itemIndex);
+        },
+        child: Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+          padding: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0.0, -5.0),
+                  color: Color(0xffEDEDED),
+                  blurRadius: 5.0,
+                ),
+              ]
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // textDirection: TextDirection.rtl,
+            children: <Widget>[
+              Container(
+                width: 100,
+                height: 100,
+                decoration: ShapeDecoration(
+                    shape: CircleBorder(side: BorderSide(color: Colors.grey)),
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}')
+                    )
+                ),
               ),
-            ]
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // textDirection: TextDirection.rtl,
-          children: <Widget>[
-            Container(
-              width: 100,
-              height: 100,
-              decoration: ShapeDecoration(
-                  shape: CircleBorder(side: BorderSide(color: Colors.grey)),
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}')
+              Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: Text(
+                      item.name,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
                   )
               ),
-            ),
-            Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                  child: Text(
-                    item.name,
+              Column(
+                children: <Widget>[
+                  Text(
+                    allTranslations.text("Price"),
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
-                )
-            ),
-            Column(
-              children: <Widget>[
-                Text(
-                  allTranslations.text("Price"),
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                        price,
-                        style: TextStyle(color: Theme.of(context).primaryTextTheme.body1.color)
-                    ),
-                    Text(
-                      ' ' + allTranslations.text("rial"),
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ],
+                  Row(
+                    children: <Widget>[
+                      Text(
+                          price,
+                          style: TextStyle(color: Theme.of(context).primaryTextTheme.body1.color)
+                      ),
+                      Text(
+                        ' ' + allTranslations.text("rial"),
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -207,38 +241,10 @@ class MenuScreenState extends State<MenuScreen> {
         ),
         body: Column(
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 4/2,
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 15.5, 10.0, 2.5),
-                  padding: EdgeInsets.all(5.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            '${MySettings.API_BASE_URL}${widget.restaurantImage}'
-                        ),
-                        colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
-                      )
-                  ),
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.restaurantTitle,
-                        style: MyTextStyle.textStyle(),
-                      )
-                  )
-              ),
-            ),
             Expanded(
-              child: Container(
-                margin: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
-                padding: EdgeInsets.all(5.0),
-                child: ListView.builder(
-                  itemCount: menuLists == null ? 0 : menuLists.length,
-                  itemBuilder: (BuildContext context, int index) => _renderMenu(index),
-                ),
+              child: ListView.builder(
+                itemCount: menuLists == null ? 1 : menuLists.length + 1,
+                itemBuilder: (BuildContext context, int index) => _renderMenu(index),
               ),
             )
           ],
@@ -252,7 +258,9 @@ class MenuScreenState extends State<MenuScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    menuLists.clear();
+    if (menuLists != null) {
+      menuLists.clear();
+    }
     super.dispose();
   }
 }

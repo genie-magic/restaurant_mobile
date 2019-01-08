@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 
 // Import screens
 import 'package:restaurant_manage/scenes/menu.dart';
@@ -48,7 +49,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         onTap: () {
           Navigator.push (
             context,
-              MyCustomRoute(
+              CupertinoPageRoute (
               builder: (context) => MenuScreen (
                 restaurantId: restaurantItems[index].id,
                 restaurantTitle: restaurantItems[index].name,
@@ -120,7 +121,9 @@ class RestaurantScreenState extends State<RestaurantScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    restaurantItems.clear();
+    if (restaurantItems != null) {
+      restaurantItems.clear();
+    }
     super.dispose();
   }
 }

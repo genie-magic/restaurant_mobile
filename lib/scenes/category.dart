@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -46,12 +47,14 @@ class CategoryScreenState extends State<CategoryScreen> {
     if (index >= categoryItems.length) {
       return null;
     }
+    print('category items image url here');
+    print(categoryItems[index].image_url);
 
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-            MyCustomRoute(
+            CupertinoPageRoute (
             builder: (context) => RestaurantScreen (categoryId: categoryItems[index].id)
           )
         );
@@ -65,10 +68,10 @@ class CategoryScreenState extends State<CategoryScreen> {
             borderRadius: BorderRadius.circular(15.0),
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage(
-                '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
-              ),
-                colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
+              image: categoryItems[index].image_url != null? NetworkImage(
+                  '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
+                ): AssetImage("assets/images/logo.png"),
+              colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
             )
           ),
           child: Align(
@@ -119,8 +122,11 @@ class CategoryScreenState extends State<CategoryScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
+    if (categoryItems != null){
+      categoryItems.clear();
+    }
+
     super.dispose();
-    categoryItems.clear();
   }
 }
 

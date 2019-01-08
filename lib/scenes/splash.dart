@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 
 /// Import scenes
 import 'package:restaurant_manage/scenes/city.dart';
@@ -17,7 +18,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.of(context).pushReplacement(CupertinoPageRoute(
         builder: (context) => CityScreen()
     ));
   }
@@ -25,14 +26,16 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      decoration: const BoxDecoration(
-        image: const DecorationImage(
-          fit: BoxFit.fill,
-          image: const AssetImage("assets/images/splash.jpg")
-        )
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+            image: const DecorationImage(
+                fit: BoxFit.fill,
+                image: const AssetImage("assets/images/splash.jpg")
+            )
+        ),
+        child: Container(),
       ),
-      child: Container(),
     );
   }
   
