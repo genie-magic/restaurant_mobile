@@ -12,14 +12,23 @@ class ContactUs extends StatefulWidget {
 
 class ContactUsState extends State<ContactUs> {
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Directionality(
         textDirection: allTranslations.textDirection,
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             title: Text(allTranslations.text("Contact Us"),
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.menu, size: 45,),
+              onPressed: () {
+                _scaffoldKey.currentState.openDrawer();
+              },
             ),
             centerTitle: true,
             actions: <Widget>[

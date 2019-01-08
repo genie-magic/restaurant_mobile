@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 // Import components
 import 'package:restaurant_manage/all_translations.dart';
@@ -58,7 +57,7 @@ class MeDrawerState extends State<MeDrawer> {
       getNavItem(Icons.info, allTranslations.text("About Us"), handleTap: () {
         Navigator.push(
           context,
-            CupertinoPageRoute (
+            MaterialPageRoute (
             builder: (context) => AboutUs()
           )
         );
@@ -66,7 +65,7 @@ class MeDrawerState extends State<MeDrawer> {
       getNavItem(Icons.email, allTranslations.text("Contact Us"), handleTap: () {
         Navigator.push(
           context,
-          CupertinoPageRoute(
+            MaterialPageRoute(
             builder: (context) => ContactUs()
           )
         );

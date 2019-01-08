@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 
 // Import components
 import 'package:restaurant_manage/common/components.dart';
@@ -51,7 +50,7 @@ class CityScreenState extends State<CityScreen> {
       onTap: () {
         Navigator.push(
           context,
-            CupertinoPageRoute (
+            MaterialPageRoute (
               builder: (context) => CategoryScreen (cityId: cityItems[index].id),
           )
         );
