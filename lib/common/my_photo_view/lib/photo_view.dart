@@ -349,7 +349,7 @@ class _PhotoViewState extends State<PhotoView>
   }
 
   Widget _buildWrapperImage(BuildContext context) {
-    double price = widget.itemPrice / 100;
+    int price = widget.itemPrice ~/ 100;
 
     return Container(
       child: Stack(

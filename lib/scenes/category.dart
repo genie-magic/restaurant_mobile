@@ -47,8 +47,6 @@ class CategoryScreenState extends State<CategoryScreen> {
     if (index >= categoryItems.length) {
       return null;
     }
-    print('category items image url here');
-    print(categoryItems[index].image_url);
 
     return GestureDetector(
       onTap: () {

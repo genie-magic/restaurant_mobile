@@ -79,7 +79,10 @@ class MenuScreenState extends State<MenuScreen> {
           type: MaterialType.transparency,
           child: GestureDetector(
             child: Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 80),
+              decoration: BoxDecoration(
+                color: Colors.black54
+              ),
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 80),
               child: new Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
@@ -146,7 +149,7 @@ class MenuScreenState extends State<MenuScreen> {
 
   Widget _renderMenuItem(Item item, int menuIndex) {
     var itemIndex = menuLists[menuIndex].items.indexOf(item);
-    String price = (int.parse(item.price.toString()) / 100).toString();
+    String price = (int.parse(item.price.toString()) ~/ 100).toString();
     return Container(
       margin: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
       padding: EdgeInsets.all(5.0),
