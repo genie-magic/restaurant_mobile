@@ -6,6 +6,7 @@ import 'package:restaurant_manage/all_translations.dart';
 
 // Import Screens
 import 'package:restaurant_manage/scenes/aboutus.dart';
+import 'package:restaurant_manage/scenes/contactus.dart';
 
 class MeDrawer extends StatefulWidget {
   @override
@@ -62,6 +63,14 @@ class MeDrawerState extends State<MeDrawer> {
           )
         );
       }),
+      getNavItem(Icons.email, allTranslations.text("Contact Us"), handleTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ContactUs()
+          )
+        );
+      })
     ];
 
     return Drawer(

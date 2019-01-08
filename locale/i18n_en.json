@@ -8,5 +8,13 @@
   "Menu": "Menu",
   "Search": "Search",
   "rial" : "rial",
-  "Price": "Price"
+  "Price": "Price",
+  "Email Address": "E-mail Address",
+  "Name" : "Name",
+  "PleaseEnterName": "PleaseEnterName",
+  "Validate Email": "The E-mail Address must be a valid email address.",
+  "Message": "Message",
+  "Processing": "Processing",
+  "contact_us_message": "Got a question? We'd love to hear from you. \n Send us a message and we'll respond as soon as possible",
+  "MailingAddress": "MAILING ADDRESS"
 }
