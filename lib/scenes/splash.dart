@@ -19,7 +19,8 @@ class SplashScreenState extends State<SplashScreen> {
 
   void navigationPage() {
     Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (context) => CityScreen()
+        builder: (context) => CityScreen(),
+        settings: RouteSettings(name: '/home')
     ));
   }
   

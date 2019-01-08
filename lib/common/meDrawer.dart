@@ -39,13 +39,13 @@ class MeDrawerState extends State<MeDrawer> {
               Navigator.of(context).pop();
               // navigate to the route
               if (routeName == '/') {
-                Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));
+                Navigator.popUntil(context,
+                    ModalRoute.withName('/home'));
               } else {
                 if (handleTap != null) {
                   handleTap();
                   return;
                 }
-                Navigator.of(context).pushNamed(routeName);
               }
             });
           }
