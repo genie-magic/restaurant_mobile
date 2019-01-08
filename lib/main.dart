@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'all_translations.dart';
 
 // Import scenes
-import 'package:restaurant_manage/scenes/city.dart';
+import 'package:restaurant_manage/scenes/splash.dart';
 
 void main() async {
   // Initializes the translation module
@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
           color: Colors.white
         )
       ),
-      home: CityScreen()
+      home: SplashScreen()
     );
   }
 }

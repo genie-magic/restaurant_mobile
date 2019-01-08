@@ -67,8 +67,8 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
 
     // Fades between routes. (If you don't want any animation,
     // just return child.)
-    return ScaleTransition(
-      scale: new Tween<double>(
+    return FadeTransition(
+      opacity: new Tween<double>(
         begin: 0.0,
         end: 1.0,
       ).animate(
@@ -81,8 +81,8 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
           ),
         ),
       ),
-      child: RotationTransition(
-        turns: new Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+      child: FadeTransition(
+        opacity: new Tween<double>(begin: 0.0, end: 1.0).animate(animation),
         child: child,
       ),
     );
