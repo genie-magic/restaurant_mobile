@@ -93,7 +93,7 @@ class MenuScreenState extends State<MenuScreen> {
                 ),
               )
             ),
-            onVerticalDragEnd: (DragEndDetails details) {
+            onTap: () {
               Navigator.pop(context);
             },
           )
