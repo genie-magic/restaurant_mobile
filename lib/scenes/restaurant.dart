@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 
 // Import screens
 import 'package:restaurant_manage/scenes/menu.dart';
@@ -49,7 +48,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         onTap: () {
           Navigator.push (
             context,
-              CupertinoPageRoute (
+              MaterialPageRoute (
               builder: (context) => MenuScreen (
                 restaurantId: restaurantItems[index].id,
                 restaurantTitle: restaurantItems[index].name,

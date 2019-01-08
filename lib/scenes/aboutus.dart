@@ -10,6 +10,8 @@ class AboutUs extends StatefulWidget {
 }
 
 class AboutUsState extends State<AboutUs> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   String aboutUs = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galleyLorem Ipsum is simply dummy text of the printing.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galleyLorem Ipsum is simply dummy text of the printing." +
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galleyLorem Ipsum is simply dummy text of the printing.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. " +
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galleyLorem Ipsum is simply dummy text of the printing.Lorem Ipsum is simply dummy text of the printing and typesetting industry" +
@@ -22,8 +24,15 @@ class AboutUsState extends State<AboutUs> {
     return Directionality(
        textDirection: allTranslations.textDirection,
        child: Scaffold(
+         key: _scaffoldKey,
          appBar: AppBar(
            title: Text(allTranslations.text("About Us"),
+           ),
+           leading: IconButton(
+             icon: Icon(Icons.menu, size: 45,),
+             onPressed: () {
+               _scaffoldKey.currentState.openDrawer();
+             },
            ),
            centerTitle: true,
            actions: <Widget>[

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 
 /// Import scenes
 import 'package:restaurant_manage/scenes/city.dart';
@@ -18,7 +17,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacement(CupertinoPageRoute(
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => CityScreen()
     ));
   }
