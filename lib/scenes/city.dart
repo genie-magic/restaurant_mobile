@@ -50,7 +50,7 @@ class CityScreenState extends State<CityScreen> {
       onTap: () {
         Navigator.push(
           context,
-            MaterialPageRoute (
+            MyCustomRoute (
               builder: (context) => CategoryScreen (cityId: cityItems[index].id),
           )
         );

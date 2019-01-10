@@ -339,6 +339,7 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
         decoration: widget.backgroundDecoration ??
             BoxDecoration(
               color: const Color.fromRGBO(0, 0, 0, 1.0),
+              borderRadius: BorderRadius.circular(20)
             ),
       ),
       onDoubleTap: computeNextScaleState,

@@ -81,7 +81,7 @@ class MenuScreenState extends State<MenuScreen> {
               decoration: BoxDecoration(
                 color: Colors.black54
               ),
-              padding: EdgeInsets.only(top: 40, bottom: 40),
+              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 5),
               child: new Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
