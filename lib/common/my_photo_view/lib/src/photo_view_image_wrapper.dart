@@ -115,6 +115,11 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
   void onScaleUpdate(ScaleUpdateDetails details) {
     double newScale = _scaleBefore * details.scale;
 
+    // Disable very small zoom out scaling
+    if (newScale < 0.4) {
+      return;
+    }
+
     final Offset delta = details.focalPoint - _normalizedPosition;
     if (details.scale != 1.0) {
       widget.onStartPanning();
