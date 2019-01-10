@@ -40,22 +40,12 @@ class ContactUsState extends State<ContactUs> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Center(
-                  child: Text(
-                    allTranslations.text("contact_us_message"),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
                 ListTile(
                   leading: Icon(
                     Icons.email,
                     color: Theme.of(context).primaryColor,
                   ),
-                  title: Text(allTranslations.text("MailingAddress")),
-                  subtitle: const Text('c.menu18@gmail.com'),
+                  title: const Text('c.menu18@gmail.com'),
                 )
               ],
             )
