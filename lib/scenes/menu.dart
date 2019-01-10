@@ -151,8 +151,7 @@ class MenuScreenState extends State<MenuScreen> {
     var itemIndex = menuLists[menuIndex].items.indexOf(item);
     String price = (int.parse(item.price.toString()) ~/ 100).toString();
     return Container(
-      margin: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
-      padding: EdgeInsets.all(5.0),
+      margin: EdgeInsets.fromLTRB(0, 2.5, 0, 2.5),
       child: GestureDetector(
         onTap: () {
           _showItemDialog(menuIndex, itemIndex);

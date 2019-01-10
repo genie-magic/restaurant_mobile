@@ -158,6 +158,7 @@ class _ExpansionTileState extends State<ExpansionTile>
     final Color headBackroundColor = _isExpanded? headerBackgroundColorExpanded : headerBackgroundColor;
 
     return Container(
+      padding: EdgeInsets.only(left: 10.0, right: 10.0),
       decoration: BoxDecoration(
           color: _backgroundColor.value ?? Colors.transparent,
           border: Border(
