@@ -361,7 +361,7 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
     return Padding(
       padding: new EdgeInsets.only(left: 50, right: 50),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(20),
         child: widget.customChild == null
             ? Image(
           image: widget.imageProvider,
