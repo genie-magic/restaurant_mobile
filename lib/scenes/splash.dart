@@ -3,6 +3,7 @@ import 'dart:async';
 
 /// Import scenes
 import 'package:restaurant_manage/scenes/city.dart';
+import 'package:restaurant_manage/common/components.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.of(context).pushReplacement(MyCustomRoute(
         builder: (context) => CityScreen(),
         settings: RouteSettings(name: '/home')
     ));

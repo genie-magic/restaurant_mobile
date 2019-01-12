@@ -116,7 +116,7 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
     double newScale = _scaleBefore * details.scale;
 
     // Disable very small zoom out scaling
-    if (newScale < 0.4) {
+    if (newScale < 0.2) {
       return;
     }
 

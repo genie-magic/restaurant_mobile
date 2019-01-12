@@ -51,7 +51,7 @@ class CityScreenState extends State<CityScreen> {
         Navigator.push(
           context,
             MyCustomRoute (
-              builder: (context) => CategoryScreen (cityId: cityItems[index].id),
+              builder: (context) => CategoryScreen(cityId: cityItems[index].id),
           )
         );
       },
