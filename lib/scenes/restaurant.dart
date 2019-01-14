@@ -48,7 +48,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         onTap: () {
           Navigator.push (
             context,
-              MyCustomRoute (
+              MaterialPageRoute (
               builder: (context) => MenuScreen (
                 restaurantId: restaurantItems[index].id,
                 restaurantTitle: restaurantItems[index].name,

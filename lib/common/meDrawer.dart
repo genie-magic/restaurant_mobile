@@ -58,7 +58,7 @@ class MeDrawerState extends State<MeDrawer> {
       getNavItem(Icons.info, allTranslations.text("About Us"), handleTap: () {
         Navigator.push(
           context,
-            MyCustomRoute (
+            MaterialPageRoute (
             builder: (context) => AboutUs()
           )
         );
@@ -66,7 +66,7 @@ class MeDrawerState extends State<MeDrawer> {
       getNavItem(Icons.email, allTranslations.text("Contact Us"), handleTap: () {
         Navigator.push(
           context,
-            MyCustomRoute (
+            MaterialPageRoute (
             builder: (context) => ContactUs()
           )
         );

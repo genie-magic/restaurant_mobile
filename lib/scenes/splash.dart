@@ -18,7 +18,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacement(MyCustomRoute(
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => CityScreen(),
         settings: RouteSettings(name: '/home')
     ));
