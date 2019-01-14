@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:cached_network_image/cached_network_image.dart';
 
 // Import components
 import 'package:restaurant_manage/common/components.dart';
@@ -65,7 +66,7 @@ class CityScreenState extends State<CityScreen> {
               color: Color(0xff2e8a9f),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: cityItems[index].image_url != null? NetworkImage(
+                image: cityItems[index].image_url != null? CachedNetworkImageProvider(
                     '${MySettings.API_BASE_URL}${cityItems[index].image_url}',
                   ): AssetImage("assets/images/logo.png"),
                 colorFilter: ColorFilter.mode(Color(0x332e8a9f), BlendMode.dstATop)

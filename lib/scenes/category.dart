@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:cached_network_image/cached_network_image.dart';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -65,7 +66,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             borderRadius: BorderRadius.circular(15.0),
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: categoryItems[index].image_url != null? NetworkImage(
+              image: categoryItems[index].image_url != null? CachedNetworkImageProvider(
                   '${MySettings.API_BASE_URL}${categoryItems[index].image_url}'
                 ): AssetImage("assets/images/logo.png"),
               colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)

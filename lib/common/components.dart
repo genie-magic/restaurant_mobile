@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTextStyle {
-  static textStyle({double fontSize = 28.0, double shadowOffset = 3.5, double blurRadius = 10.0}) {
+  static textStyle({double fontSize = 28.0, double shadowOffset = 4.5, double blurRadius = 15.0}) {
     return TextStyle(
         fontSize: fontSize,
         fontFamily: 'VIP Hala',
@@ -15,7 +15,7 @@ class MyTextStyle {
           Shadow( // bottomRight
               offset: Offset(shadowOffset, -1 * shadowOffset),
               color: Colors.white,
-              blurRadius: blurRadius
+              blurRadius: blurRadius,
           ),
           Shadow( // topRight
               offset: Offset(shadowOffset, shadowOffset),

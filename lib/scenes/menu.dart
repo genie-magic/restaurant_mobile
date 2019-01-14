@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:cached_network_image/cached_network_image.dart';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -58,7 +59,7 @@ class MenuScreenState extends State<MenuScreen> {
       menuLists[menuIndex].items.map((f) => PhotoViewGalleryPageOptions(
         imageProvider:
           f.image_url != null?
-          NetworkImage('${MySettings.API_BASE_URL}${f.image_url}'):
+          CachedNetworkImageProvider('${MySettings.API_BASE_URL}${f.image_url}'):
           AssetImage("assets/images/logo.png"),
         itemLabel: f.name,
         itemPrice: f.price,
@@ -115,7 +116,7 @@ class MenuScreenState extends State<MenuScreen> {
                 borderRadius: BorderRadius.circular(15.0),
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(
+                    image: CachedNetworkImageProvider(
                         '${MySettings.API_BASE_URL}${widget.restaurantImage}'
                     ),
                     colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
@@ -180,7 +181,7 @@ class MenuScreenState extends State<MenuScreen> {
                     shape: CircleBorder(side: BorderSide(color: Colors.grey)),
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: NetworkImage('${MySettings.API_BASE_URL}${item.image_url}')
+                        image: CachedNetworkImageProvider('${MySettings.API_BASE_URL}${item.image_url}')
                     )
                 ),
               ),

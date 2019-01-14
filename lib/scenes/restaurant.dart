@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:cached_network_image/cached_network_image.dart';
 
 // Import screens
 import 'package:restaurant_manage/scenes/menu.dart';
@@ -66,7 +67,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                   borderRadius: BorderRadius.circular(15.0),
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(
+                    image: CachedNetworkImageProvider(
                         '${MySettings.API_BASE_URL}${restaurantItems[index].image_url}'
                     ),
                       colorFilter: ColorFilter.mode(Colors.black.withBlue(10).withOpacity(0.6), BlendMode.darken)
