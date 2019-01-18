@@ -22,12 +22,12 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class RestaurantScreenState extends State<RestaurantScreen> {
-  final String url = '${MySettings.API_BASE_URL}/api/restaurants';
+  final String url = '${MySettings.API_BASE_URL}/api/restaurants?is_open=1';
   String searchQuery;
   List<Restaurant> restaurantItems;
 
   Future<Restaurant> getRestaurantData() async {
-    var res = await http.get(Uri.encodeFull('$url?category=${widget.categoryId}&restaurant_name=$searchQuery'), headers: {"Accept": "application/json"});
+    var res = await http.get(Uri.encodeFull('$url&category=${widget.categoryId}&restaurant_name=$searchQuery'), headers: {"Accept": "application/json"});
 
     setState(() {
       var response = json.decode(res.body);

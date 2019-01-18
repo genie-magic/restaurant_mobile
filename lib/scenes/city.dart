@@ -22,14 +22,14 @@ class CityScreen extends StatefulWidget {
 }
 
 class CityScreenState extends State<CityScreen> {
-  final String url = '${MySettings.API_BASE_URL}/api/cities';
+  final String url = '${MySettings.API_BASE_URL}/api/cities?is_open=1';
   String searchQuery = '';
 
   List<City> cityItems;
   int activeIndex = -1;
 
   Future<City> getCityData() async {
-    var res = await http.get(Uri.encodeFull(url + '?' + searchQuery), headers: {"Accept": "application/json"});
+    var res = await http.get(Uri.encodeFull(url + '&' + searchQuery), headers: {"Accept": "application/json"});
 
     setState((){
       var response = json.decode(res.body);

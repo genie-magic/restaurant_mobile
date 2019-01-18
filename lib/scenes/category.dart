@@ -25,12 +25,12 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class CategoryScreenState extends State<CategoryScreen> {
-  final String url = '${MySettings.API_BASE_URL}/api/categories';
+  final String url = '${MySettings.API_BASE_URL}/api/categories?is_open=1';
   List<Category> categoryItems;
   String searchQuery;
 
   Future<Category> getCategoryData() async {
-    var res = await http.get(Uri.encodeFull('$url?city=${widget.cityId}&category_name=$searchQuery'), headers: {"Accept": "application/json"});
+    var res = await http.get(Uri.encodeFull('$url&city=${widget.cityId}&category_name=$searchQuery'), headers: {"Accept": "application/json"});
 
     setState((){
       var response = json.decode(res.body);
