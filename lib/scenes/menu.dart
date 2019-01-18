@@ -3,6 +3,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+import 'dart:math';
 
 // Import components
 import 'package:restaurant_manage/common/meDrawer.dart';
@@ -14,6 +16,10 @@ import 'package:restaurant_manage/common/my_photo_view/lib/photo_view_gallery.da
 
 // Import settings
 import 'package:restaurant_manage/settings.dart';
+
+// You can also test with your own ad unit IDs by registering your device as a
+// test device. Check the logs for your device's ID value.
+const String testDevice = 'YOUR_DEVICE_ID';
 
 class MenuScreen extends StatefulWidget {
   final String restaurantId;
@@ -32,7 +38,16 @@ class MenuScreen extends StatefulWidget {
 }
 
 class MenuScreenState extends State<MenuScreen> {
+
   final String url = '${MySettings.API_BASE_URL}/api/menus';
+  final _random = new Random();
+
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: testDevice != null ? <String>[testDevice] : null,
+    childDirected: true,
+    nonPersonalizedAds: true,
+  );
+
   String searchQuery;
   List<Menu> menuLists;
 
@@ -51,7 +66,19 @@ class MenuScreenState extends State<MenuScreen> {
     searchQuery = text;
     getMenuData();
   }
+  int next(int min, int max) => min + _random.nextInt(max - min);
 
+  _showRewardedVideo() {
+    // Show rewarded video
+    RewardedVideoAd.instance.show();
+  }
+
+  _loadRewardedVideo() {
+    // Load rewarded video again
+    RewardedVideoAd.instance.load(
+        adUnitId: RewardedVideoAd.testAdUnitId,
+        targetingInfo: targetingInfo);
+  }
   _makeItemGallery(int menuIndex) {
     List<PhotoViewGalleryPageOptions> options;
 
@@ -71,6 +98,10 @@ class MenuScreenState extends State<MenuScreen> {
 
   _showItemDialog(int menuIndex, int itemIndex) {
     // String price = (int.parse(item.price.toString()) / 100).toString();
+
+    // Load rewarded video
+    _loadRewardedVideo();
+
     var _pageController = new PageController(initialPage: itemIndex);
     showDialog(
       context: context,
@@ -98,6 +129,11 @@ class MenuScreenState extends State<MenuScreen> {
             ),
             onTap: () {
               Navigator.pop(context);
+
+              // for 0.2 possibility show rewarded video
+              if ( next(0, 10) < 3 ) {
+                _showRewardedVideo();
+              }
             },
           )
         );
@@ -226,6 +262,12 @@ class MenuScreenState extends State<MenuScreen> {
     super.initState();
     searchQuery='';
     this.getMenuData();
+
+    /// Initialize ad
+    // Ads.init("ca-app-pub-3940256099942544~3347511713");
+    RewardedVideoAd.instance.load(
+        adUnitId: RewardedVideoAd.testAdUnitId,
+        targetingInfo: targetingInfo);
   }
 
   @override
@@ -263,6 +305,7 @@ class MenuScreenState extends State<MenuScreen> {
     if (menuLists != null) {
       menuLists.clear();
     }
+
     super.dispose();
   }
 }
