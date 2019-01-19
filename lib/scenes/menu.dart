@@ -51,6 +51,9 @@ class MenuScreenState extends State<MenuScreen> {
   String searchQuery;
   List<Menu> menuLists;
 
+  // Admobs
+  InterstitialAd _interstitialAd;
+
   Future<Menu> getMenuData() async {
     var res = await http.get(Uri.encodeFull('$url?restaurant=${widget.restaurantId}&menu_name=$searchQuery&item_name=$searchQuery'), headers: {"Accept": "application/json"});
 
@@ -79,6 +82,22 @@ class MenuScreenState extends State<MenuScreen> {
         adUnitId: RewardedVideoAd.testAdUnitId,
         targetingInfo: targetingInfo);
   }
+
+  InterstitialAd createInterstitialAd() {
+    return InterstitialAd(
+      adUnitId: InterstitialAd.testAdUnitId,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event $event");
+      },
+    );
+  }
+
+  _loadInterstitialAd() {
+    _interstitialAd?.dispose();
+    _interstitialAd = createInterstitialAd()..load();
+  }
+
   _makeItemGallery(int menuIndex) {
     List<PhotoViewGalleryPageOptions> options;
 
@@ -101,6 +120,7 @@ class MenuScreenState extends State<MenuScreen> {
 
     // Load rewarded video
     _loadRewardedVideo();
+    _loadInterstitialAd();
 
     var _pageController = new PageController(initialPage: itemIndex);
     showDialog(
@@ -130,9 +150,12 @@ class MenuScreenState extends State<MenuScreen> {
             onTap: () {
               Navigator.pop(context);
 
-              // for 0.2 possibility show rewarded video
-              if ( next(0, 10) < 3 ) {
+              // for 1/30 possibility show rewarded/interstitialAD video
+              int possibility = next(0, 60);
+              if ( possibility < 3 ) {
                 _showRewardedVideo();
+              } else if ( possibility > 58 ) {
+                _interstitialAd?.show();
               }
             },
           )
@@ -302,10 +325,8 @@ class MenuScreenState extends State<MenuScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    if (menuLists != null) {
-      menuLists.clear();
-    }
-
+    menuLists?.clear();
+    _interstitialAd?.dispose();
     super.dispose();
   }
 }
