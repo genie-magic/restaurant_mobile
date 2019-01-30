@@ -240,7 +240,9 @@ class MenuScreenState extends State<MenuScreen> {
                     shape: CircleBorder(side: BorderSide(color: Colors.grey)),
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: CachedNetworkImageProvider('${MySettings.API_BASE_URL}${item.image_url}')
+                        image: item.image_url != null?
+                        CachedNetworkImageProvider('${MySettings.API_BASE_URL}${item.image_url}'):
+                        AssetImage("assets/images/logo-black.png"),
                     )
                 ),
               ),
